@@ -19,14 +19,13 @@
 
 .QuizList li {
     margin-bottom: 10px;
-    
 }
 
 .QuizList li a {
-text-decoration: none;
-color: #fff;
+    text-decoration: none;
+    color: #fff;
 }
 
 .QuizList li a:hover {
-color: #363f54;
+    color: #363f54;
 }
