@@ -1,5 +1,0 @@
-export const ADD = 'ADD'
-export const SUB = 'SUB'
-export const ADD_NUMB = 'ADD_NUMB'
-export const ADD2 = 'ADD2'
-export const ADD_NUMB_ASYNC = 'ADD_NUMB_ASYNC'

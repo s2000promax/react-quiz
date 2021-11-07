@@ -2,17 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import App_redux from './App_redux'
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 
-import Thunk from 'redux-thunk'
+import thunk from 'redux-thunk'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import rootReducer from './redux/rootReducer'
+import rootReducer from './store/reducers/rootReducers'
 
 //============MiddleWare=====Start
 // function loggerMiddleWare(store) {
@@ -29,20 +28,19 @@ import rootReducer from './redux/rootReducer'
 
 const loggerMiddleWare = store => next => action => {
   const result = next(action)
-       console.log('MiddleWare ', store.getState())
-      return result
+  console.log('MiddleWare ', store.getState())
+  return result
 }
 //===========MidleWare======End
 
-//const store = createStore(rootReducer, applyMiddleware(loggerMiddleWare, Thunk))
-// const middleware = {loggerMiddleWare, Thunk}
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleWare, Thunk)))
+//const store = createStore(rootReducer, applyMiddleware(loggerMiddleWare, thunk))
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(/*loggerMiddleWare,*/ thunk)))
 
-const app_redux = (
-  <Provider store={store}>
-    <App_redux />
-  </Provider>
-)
+// const app_redux = (
+//   <Provider store={store}>
+//     <App_redux />
+//   </Provider>
+// )
 
 
 
@@ -51,11 +49,13 @@ const app_redux = (
 
 
 const app = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store = { store } >
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider >
 )
 
-//ReactDOM.render(app, document.getElementById('root'))
-ReactDOM.render(app_redux, document.getElementById('root'))
+ReactDOM.render(app, document.getElementById('root'))
+//ReactDOM.render(app_redux, document.getElementById('root'))
 registerServiceWorker()
